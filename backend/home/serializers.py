@@ -4,8 +4,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        # fields = ('email','username','password','name')
-        fields = ('username','password')
+        fields = ('username','password','email','name')
         extra_kwargs = {'password':{'write_only':True,'min_length':8}}
 
     def create(self,validate_data):
@@ -18,12 +17,16 @@ class AuthTokenSerializer(serializers.Serializer):
         trim_whitespace = False
     )
     def validate(self, attrs):
+        email = attrs.get('email')
         username = attrs.get('username')
         password = attrs.get('password')
+        name = attrs.get('name')
 
         user = authenticate(
             request=self.context.get('request'),
+            email = email,
             username = username,
+            name = name,
             password = password
         )
         if not user:

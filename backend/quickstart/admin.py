@@ -8,9 +8,9 @@ from quickstart import models
 class UserAdmin(BaseUser):
     ordering = ['id']
     list_display = ['id','username','email','name']
-    list_display = ['id','email']
+    list_display_links = ['id','email']
     fieldsets = (
-        (None,{'fields':('username','email','passoword')}),
+        (None,{'fields':('username','email','password')}),
         (_('Personal Info'),{'fields':('name',)}),
         (_('Permission'),{'fields':('is_active','is_staff','is_superuser')}),
         (_('Imp dates'),{'fields':('last_login',)})
