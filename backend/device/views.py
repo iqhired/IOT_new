@@ -3,7 +3,9 @@ from .models import Device, models
 
 def profile(request):
 
-    return render(request,"device/profile.html",{})
+    std = Device.objects.all()
+
+    return render(request,"device/profile.html",{'std':std})
 
 def device_add(request):
 
@@ -26,3 +28,29 @@ def device_add(request):
 
 
     return render(request, "device/add_device.html",{})
+
+def delete_device(request,device_id):
+    s = Device.objects.get(pk=device_id)
+    s.delete()
+
+    return redirect("/device/profile")
+
+def update_device(request ,device_id):
+     std = Device.objects.get(pk=device_id)
+     return render(request,"Device/update_device.html",{'std': std})
+
+def do_update_device(request,device_id):
+    device_name = request.POST.get('d_name')
+    device_id = request.POST.get('d_id')
+    location = request.POST.get('d_location')
+
+    std = Device.objects.get(pk=device_id)
+    std.device_name = device_name
+    std.device_id = device_id
+    std.location = location
+   
+    std.save()
+
+    return redirect("/device/profile")
+
+

@@ -8,29 +8,29 @@
   </head>
   <body>
     {% include 'device/navbar.html' %}
-    <h1 class="text-center my-3">Add New Device</h1>
+    <h1 class="text-center my-3">Update Device</h1>
     <div class="container">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card ">
             <div class="card-body">
-              <form action="/device/add_device/" method="POST">
+              <form action="/device/do_update_device/{{std.id}}" method="POST">
                 {% csrf_token %}
                 <div class="md-3 my-3">
                   <label for="name">Device Name</label>
-                  <input name="d_name" type="text" id="name" class="form-control" placeholder="Enter Your Device Name" required>
+                  <input name="d_name" type="text" id="name" class="form-control" placeholder="Enter Your Device Name" required value="{{std.device_name}}">
                 </div>
                 <div class="md-3 my-3">
                   <label for="id">Device ID</label>
-                  <input name="d_id" type="text" id="id" class="form-control" placeholder="Enter Your Device Id" required>
+                  <input name="d_id" type="text" id="id" class="form-control" placeholder="Enter Your Device Id" required value="{{std.device_id}}">
                 </div>
                 <div class="md-3 my-3">
                   <label for="location">Device Location</label>
-                  <input name="d_location" type="text" id="location" class="form-control" placeholder="Enter Your Device Location" required>
+                  <input name="d_location" type="text" id="location" class="form-control" placeholder="Enter Your Device Location" required value="{{std.location}}">
                 </div>
                 <div class="container text-center my-3">
-                 <button class="btn btn-primary">
-                   Add Device
+                 <button class="btn btn-success">
+                   Update Device
                  </button>
                 </div>
               </form>
